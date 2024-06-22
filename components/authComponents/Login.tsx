@@ -15,10 +15,10 @@ import {
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
-import { signIn } from "@/app/(auth)/_auth/auth"
+import { signIn } from "@/auth/auth"
 import { useToast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import { ToastAction } from "@/components/ui/toast"
+
 
 const formSchema = z.object({
   email: z.string().min(2).max(50).email({
@@ -31,6 +31,8 @@ const formSchema = z.object({
 
 
 export default function LoginForm() {
+
+
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -55,7 +57,7 @@ export default function LoginForm() {
         })
 
     }
-
+    
     return (
         <>
         <div className="flex justify-center px-5">

@@ -1,7 +1,5 @@
 import Logo from "@/components/Logo"
-import dynamic from "next/dynamic"
 import LoginForm from "../../../components/authComponents/Login"
-
 
 export default function LoginPage() {
     return (

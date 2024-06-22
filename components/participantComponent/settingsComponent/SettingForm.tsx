@@ -13,28 +13,18 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { buttonVariants } from "@/components/ui/button"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
 
 
+import { updateUser } from "@/auth/userAction"
 
-import { signUp } from "@/auth/auth"
-import { toast, useToast } from "../ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import { toast } from "@/components/ui/use-toast"
 
 const phoneRegex = new RegExp(
     /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
   );
  
 const formSchema = z.object({
-  role_id: z.string(),
   first_name: z.string().min(2, {
     message: "First Name must be at least 2 characters."
   }),
@@ -65,17 +55,24 @@ const formSchema = z.object({
     }
 )
 
-export default function RegisterForm() {
+interface User { 
+    User: any
+}
+
+export default function SettingForm({User}: User) {
+
+    const { first_name, last_name, gender, user_name, date_of_birth, mobile_number, email } = User;
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            role_id: "2",
-            first_name: "",
-            last_name: "",
-            user_name: "",
-            mobile_number: "",
-            email: "",
+            first_name: first_name,
+            gender: gender,
+            date_of_birth: date_of_birth,
+            last_name: last_name,
+            user_name: user_name,
+            mobile_number: mobile_number,
+            email: email,
             password: "",
             confirmPassword: "",
             country: "Philippines"
@@ -84,8 +81,9 @@ export default function RegisterForm() {
 
     const  onSubmit = async (values: z.infer<typeof formSchema>) => {
         
-        const res = await signUp(values)
+        const res = await updateUser(values)
 
+        
         toast({
             title:"Something went wrong",
             description: res?.message
@@ -95,36 +93,9 @@ export default function RegisterForm() {
     return (
         <>
         <Toaster/>
-        <div className="flex justify-center items-center py-1">
-            <h1 className="font-bold font-sans px-2 text-5xl text-amber-300">REGISTER </h1>
-        </div>
         <div className="flex justify-center py-10">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 flex justify-center flex-col w-[300px]">
-
-                <FormField
-                control={form.control}
-                name="role_id"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Role</FormLabel>
-                    <FormControl>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <SelectTrigger className="rounded">
-                                <SelectValue placeholder="Participant" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="2">Participant</SelectItem>
-                                <SelectItem value="1">Admin</SelectItem>
-                                <SelectItem value="3">Organizer</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-
                 {/** Firstname form Field */}
                 <FormField
                 control={form.control}
@@ -238,7 +209,7 @@ export default function RegisterForm() {
                 name="password"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>New  Password</FormLabel>
                     
                     <FormControl>
                         <Input className="rounded" placeholder="******" type="password" {...field} ></Input>
@@ -254,7 +225,7 @@ export default function RegisterForm() {
                 name="confirmPassword"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>Confirm New Password</FormLabel>
                     
                     <FormControl>
                         <Input className="rounded" placeholder="******" type="password" {...field} ></Input>
@@ -263,8 +234,7 @@ export default function RegisterForm() {
                     </FormItem>
                 )}
                 />
-                <Button className="rounded" type="submit">Sign Up</Button>
-                <Link  href={"/login"} className={buttonVariants({ variant: "secondary" })}>Login</Link>
+                <Button className="rounded bg-amber-400 hover:bg-amber-300 text-black" type="submit" variant={"default"}>Update Profile</Button>
             </form>
             </Form>
 

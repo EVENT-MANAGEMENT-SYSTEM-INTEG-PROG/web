@@ -1,9 +1,7 @@
 import 'server-only';
-
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import API_URL from '@/constants/constants';
-
 
 
 export async function createSession(token: string) {
@@ -15,8 +13,16 @@ export async function createSession(token: string) {
             path: '/'
         }
     )
+    cookies().set("isSign", "true",
+        {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'lax',
+            path: '/'
+        }
+    )
 
-    redirect('/dashboard')
+    redirect('/dashboard/profile')
 }
 
 
@@ -24,7 +30,7 @@ export async function verifySession() {
     const session = cookies().get('session')?.value
     
     const res: any = await fetch(`${API_URL}/api/user/me`, {
-        method: "POST",
+        method: "GET",
         mode: "cors",
         headers: {
             "Accept": "application/json",
@@ -34,7 +40,6 @@ export async function verifySession() {
     })
 
     if (!res.ok) {
-        cookies().delete('session')
         redirect('/login')
     }
 
@@ -60,6 +65,7 @@ export async function destroySession() {
     }
     else {
         cookies().delete('session')
+        cookies().delete('isSign')
         redirect('/login')
     }
 

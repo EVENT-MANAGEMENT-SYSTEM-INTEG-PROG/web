@@ -1,7 +1,7 @@
 "use server";
 
 import API_URL from "@/constants/constants";
-import { createSession } from "./stateless";
+import { createSession, destroySession } from "./stateless";
 import { redirect } from 'next/navigation';
 
 export async function signIn(data: any) {
@@ -52,4 +52,8 @@ export async function signUp(data: any) {
     else {
         redirect('/login')
     }
+}
+
+export async function signOut() {
+    await destroySession()
 }
