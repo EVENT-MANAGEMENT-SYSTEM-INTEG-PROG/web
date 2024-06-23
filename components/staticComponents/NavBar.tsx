@@ -1,8 +1,6 @@
 import { buttonVariants } from "@/components/ui/button"
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { Button } from "../ui/button";
 import { LogIn } from 'lucide-react';
 import { cookies } from 'next/headers'
 import ProfilePopOver from "../navComponents/ProfilePopOver";
@@ -59,7 +57,7 @@ const Navbar = () => {
 
                   <Link 
                   className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/services"}>
+                  href={"/about"}>
                   About
                   </Link>
 
