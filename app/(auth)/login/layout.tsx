@@ -11,7 +11,7 @@ export default function RootLayout({
     children: React.ReactNode;
   }>) {
     return (
-        <div className="bg-landing bg-cover h-[100vh]"> 
+        <div> 
             {children}
         </div>
     );

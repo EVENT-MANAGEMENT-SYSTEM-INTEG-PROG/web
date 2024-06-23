@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/staticComponents/Footer";
 import Navbar from "@/components/staticComponents/NavBar";
-
-const inter = Inter({ subsets: ["latin"] });
+import EWFooter from "@/components/staticComponents/Footer";
 
 export const metadata: Metadata = {
   title: "Event Wise",
@@ -22,6 +19,7 @@ export default function RootLayout({
       <body className="bg-landing bg-cover bg-no-repeat">
         <Navbar/>
         {children}
+        <EWFooter/>
       </body>
     </html>
   );

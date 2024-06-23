@@ -25,7 +25,8 @@ export async function signIn(data: any) {
     }
     else {
         const token = res.token
-        await createSession(token)
+        const role = res.role
+        await createSession(token, role)
     }
 }
 

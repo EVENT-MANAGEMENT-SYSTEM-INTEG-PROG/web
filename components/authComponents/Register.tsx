@@ -84,12 +84,21 @@ export default function RegisterForm() {
 
     const  onSubmit = async (values: z.infer<typeof formSchema>) => {
         
-        const res = await signUp(values)
+        const res: any = await signUp(values)
+        
+        if(!res) {
+            toast({
+                title:"Account has been created",
+                description: res?.message
+            })
+        }
+        else {
+            toast({
+                title:"Something went wrong",
+                description: res?.message
+            })
+        }
 
-        toast({
-            title:"Something went wrong",
-            description: res?.message
-        })
     }
 
     return (
@@ -101,30 +110,6 @@ export default function RegisterForm() {
         <div className="flex justify-center py-10">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 flex justify-center flex-col w-[300px]">
-
-                <FormField
-                control={form.control}
-                name="role_id"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Role</FormLabel>
-                    <FormControl>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <SelectTrigger className="rounded">
-                                <SelectValue placeholder="Participant" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="2">Participant</SelectItem>
-                                <SelectItem value="1">Admin</SelectItem>
-                                <SelectItem value="3">Organizer</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-
                 {/** Firstname form Field */}
                 <FormField
                 control={form.control}

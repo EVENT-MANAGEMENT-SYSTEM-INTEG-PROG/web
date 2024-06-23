@@ -1,17 +1,15 @@
 
 
-
-
 export default function TopCard({title} : any) {
     return (
         <>
         <section
         className="">
             <div
-            className="bodflex flex-col "
+            className=""
             >
             {/* top Part of body */}
-            <div className="flex flex-col items-center mt-2 ">
+            <div className="text-center">
                 <h1
                 className="text-yellow-300 text-4xl font-bold"
                 style={{

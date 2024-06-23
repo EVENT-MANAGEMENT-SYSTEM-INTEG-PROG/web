@@ -10,6 +10,7 @@ import BudgetPopOver from "../navComponents/BudgetPopOver";
 const Navbar = () => {
 
     const isAuth = cookies().get('isSign')?.value
+    const isParticipant = cookies().get('participant')?.value
 
     return (
       <div >
@@ -41,31 +42,44 @@ const Navbar = () => {
                   Events
                   </Link>
 
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/services"}>
-                  Services
-                  </Link>
+                  {
+                    !isParticipant ?
+                    <>
+                    <Link 
+                    className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
+                    href={"/services"}>
+                    Schedule
+                    </Link>
+                    </>
+                    :
+                    <>
+                    <Link 
+                    className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
+                    href={"/services"}>
+                    Services
+                    </Link>
+                    </>
+                  }
 
-  
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/services"}>
-                  Schedule
-                  </Link>
+                  {
+                    !isAuth ? 
+                    <>
+                      <Link 
+                      className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
+                      href={"/about"}>
+                      About
+                      </Link>
 
+                      <Link 
+                      className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
+                      href={"/contact"}>
+                      Contact Us
+                      </Link>
+                    </>
+                    :
+                    <></>
+                  }
 
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/about"}>
-                  About
-                  </Link>
-
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/contact"}>
-                  Contact Us
-                  </Link>
 
                 </div>
               </div>
