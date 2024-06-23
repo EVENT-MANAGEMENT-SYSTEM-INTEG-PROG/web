@@ -21,10 +21,11 @@ import Image from "next/image";
 interface Profile {
     name: string,
     email: string,
+    role_id: number,
 };
 
 export default function ProfileCard(profile : Profile) {
-    const {name, email} = profile
+    const {name, email, role_id} = profile
     const avatar = createAvatar(lorelei, {
         seed: name,
       });
@@ -39,7 +40,15 @@ export default function ProfileCard(profile : Profile) {
                 <CardHeader className="text-center items-center ">
                     <Image src={dataUri} width={250} height={250} alt="@profile"/>
                     <CardTitle>{name}</CardTitle>
-                    <CardDescription>Participant</CardDescription>
+                    <CardDescription>{
+                        role_id == 1 ?
+                        "Admin"
+                        :
+                        role_id == 2 ?
+                        "Participant"
+                        :
+                        "Organizer"
+                        }</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <CardDescription>{email}</CardDescription>
