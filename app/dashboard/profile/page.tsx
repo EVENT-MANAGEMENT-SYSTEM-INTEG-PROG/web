@@ -1,6 +1,6 @@
 
 
-import Profile from "@/components/participantComponent/Profile"
+import Profile from "@/components/Participants/Profile"
 
 export default function Page() {
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { isAdmin } from './auth/userAction';
 
-const protectedRoutes = ['/dashboard'];
+const protectedRoutes = ['/dashboard', '/dashboard/profile'];
 const publicRoutes = ['/'];
 const userCreateRoutes = ['/login', '/register'];
 
@@ -28,7 +28,7 @@ export default async function middleware(req:NextRequest) {
         return NextResponse.redirect(new URL('/dashboard/profile', req.nextUrl) );
     }
 
-    if(isProtectedRoute && !isSign) {
+    if(req.nextUrl.pathname.startsWith('/dashboard') && !isSign) {
         return NextResponse.redirect(new URL('/login', req.nextUrl) );
     }
 

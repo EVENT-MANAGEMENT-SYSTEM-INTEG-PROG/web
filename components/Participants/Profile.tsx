@@ -1,7 +1,7 @@
 
 import { getUser } from "@/auth/user"
-import ProfileCard from "../staticComponents/ProfileCard"
-import TopCard from "../staticComponents/TopCard"
+import ProfileCard from "../Static/ProfileCard"
+import TopCard from "../Static/TopCard"
 
 export default async function Profile() {
 

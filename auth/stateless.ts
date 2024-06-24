@@ -51,8 +51,12 @@ export async function verifySession() {
         }
     })
 
-    if (!req.ok) {
-        redirect('/login')
+    try {
+        if(!req.ok) {
+            redirect('/login')
+        }  
+    } catch (error) {
+        console.log(error)
     }
 
 }
@@ -71,7 +75,7 @@ export async function destroySession() {
         }
     })
     
-
+    
     if (!res.ok) {
         return await res.json().message
     }

@@ -1,5 +1,5 @@
 import Logo from "@/components/Logo"
-import ForgotForm from "@/components/authComponents/Forgot"
+import ForgotForm from "@/components/Auth/Forgot"
 
 export default function ForgotPage() {
     return (

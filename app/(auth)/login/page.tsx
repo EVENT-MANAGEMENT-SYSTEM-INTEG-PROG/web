@@ -1,5 +1,5 @@
 import Logo from "@/components/Logo"
-import LoginForm from "../../../components/authComponents/Login"
+import LoginForm from "../../../components/Auth/Login"
 
 export default function LoginPage() {
     return (

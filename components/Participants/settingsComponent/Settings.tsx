@@ -1,6 +1,6 @@
 
 
-import TopCard from "../../staticComponents/TopCard"
+import TopCard from "../../Static/TopCard"
 import SettingForm from "./SettingForm"
 import { getUser } from "@/auth/user"
 

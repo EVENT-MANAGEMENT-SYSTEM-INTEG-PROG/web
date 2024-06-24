@@ -1,4 +1,4 @@
-import Settings from "@/components/participantComponent/settingsComponent/Settings"
+import Settings from "@/components/Participants/settingsComponent/Settings"
 
 export default function SettingPage() {
     return (

@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { LogIn } from 'lucide-react';
 import { cookies } from 'next/headers'
-import ProfilePopOver from "../navComponents/ProfilePopOver";
-import NotificationPopOver from "../navComponents/NotificationPopOver";
-import BudgetPopOver from "../navComponents/BudgetPopOver";
+import ProfilePopOver from "../NavigationBar/ProfilePopOver";
+import NotificationPopOver from "../NavigationBar/NotificationPopOver";
+import BudgetPopOver from "../NavigationBar/BudgetPopOver";
 
 const Navbar = () => {
 
