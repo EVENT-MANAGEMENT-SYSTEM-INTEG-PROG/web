@@ -13,7 +13,7 @@ import { signOut } from "@/auth/auth"
 export default function ProfilePopOver() {
     return (
         <Popover>
-            <PopoverTrigger asChild>
+            <PopoverTrigger asChild className="hover:bg-amber-300">
                 <Button variant={"ghost"}>
                     <CircleUser/>
                 </Button>
@@ -29,7 +29,7 @@ export default function ProfilePopOver() {
 
                     <div className="flex flex-row my-2 hover:bg-slate-200 rounded py-3 cursor-pointer">
                         <Calendar className="mx-1"/>
-                        <Link href={"/dashboard/profile"}>
+                        <Link href={"/dashboard/profile/events"}>
                             My Event
                         </Link>
                     </div>

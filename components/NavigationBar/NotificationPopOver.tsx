@@ -12,8 +12,8 @@ export default function NotificationPopOver() {
     return (
         <>
         <Popover>
-            <PopoverTrigger asChild className="mx-5">
-                <Button variant={"ghost"}>
+            <PopoverTrigger asChild className="mx-5 ">
+                <Button variant={"ghost"} className="hover:bg-amber-300">
                     <Bell/>
                 </Button>
             </PopoverTrigger>
