@@ -29,7 +29,7 @@ export default function EventButton() {
                     Book Event
                 </Button>
             </DialogTrigger>
-            <DialogContent className=" border-amber-400 " suppressHydrationWarning={true}>
+            <DialogContent className=" border-amber-400 w-[400px]" suppressHydrationWarning={true}>
                 <DialogHeader>
                 <DialogTitle>Book A New Event</DialogTitle>
                 <DialogDescription>
