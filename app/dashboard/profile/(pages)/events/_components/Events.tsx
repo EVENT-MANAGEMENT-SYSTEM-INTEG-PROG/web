@@ -11,27 +11,6 @@ import {
 import Details from "./Details"
 import { myEvent } from "../_actions/actions"
 
-const events  = [
-    {
-        name: "Mother's Anniversary",
-        status: "pending",
-        location: "Cagayan De Oro, Lim Ketkai Atrium",
-        schedule: "January 25, 2024 : 10:00AM",
-    },
-    {
-        name: "Mother's Anniversary",
-        status: "pending",
-        location: "Cagayan De Oro, Lim Ketkai Atrium",
-        schedule: "January 25, 2024 : 10:00AM",
-    },
-    {
-        name: "Mother's Anniversary",
-        status: "pending",
-        location: "Cagayan De Oro, Lim Ketkai Atrium",
-        schedule: "January 25, 2024 : 10:00AM",
-    },
-]
-
 export default async function Events() {
 
     const event = await myEvent()
@@ -64,7 +43,7 @@ export default async function Events() {
                                     <TableCell>{content.event_location}</TableCell>
                                     <TableCell>{content.event_date}</TableCell>
                                     <TableCell>
-                                        <Details/>
+                                        <Details content={content}/>
                                     </TableCell>
                                 </TableRow>
                                 </>

@@ -9,8 +9,10 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { CircleUser, Settings, Calendar, LogOut } from "lucide-react"
 import { signOut } from "@/auth/auth"
+import { getCookie } from 'cookies-next';
 
 export default function ProfilePopOver() {
+    const isParticipant = getCookie('participant')
     return (
         <Popover>
             <PopoverTrigger asChild className="hover:bg-amber-300">
@@ -27,12 +29,19 @@ export default function ProfilePopOver() {
                         </Link>
                     </div>
 
-                    <div className="flex flex-row my-2 hover:bg-slate-200 rounded py-3 cursor-pointer">
-                        <Calendar className="mx-1"/>
-                        <Link href={"/dashboard/profile/events"}>
-                            My Event
-                        </Link>
-                    </div>
+                    {
+                        isParticipant != undefined ? 
+                        <div className="flex flex-row my-2 hover:bg-slate-200 rounded py-3 cursor-pointer">
+                            <Calendar className="mx-1"/>
+                            <Link href={"/dashboard/profile/events"}>
+                                My Event
+                            </Link>
+                        </div>
+                        :
+                        <>
+                        </>
+                    }
+
 
                     <div className="flex flex-row my-2 hover:bg-slate-200 rounded py-3 cursor-pointer">
                         <Settings className="mx-1"/>
