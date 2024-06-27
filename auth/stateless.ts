@@ -32,6 +32,17 @@ export async function createSession(token: string, role: string) {
             }
         ) 
     }
+    
+    if(role == "1") {
+        cookies().set("admin", "true",
+            {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'lax',
+                path: '/'
+            }
+        ) 
+    }
 
     redirect('/dashboard/profile')
 }
@@ -83,6 +94,7 @@ export async function destroySession() {
         cookies().delete('session')
         cookies().delete('isSign')
         cookies().delete('participant')
+        cookies().delete('admin')
         redirect('/login')
     }
 

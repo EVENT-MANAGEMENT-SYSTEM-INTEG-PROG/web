@@ -6,82 +6,38 @@ import { cookies } from 'next/headers'
 import ProfilePopOver from "../NavigationBar/ProfilePopOver";
 import NotificationPopOver from "../NavigationBar/NotificationPopOver";
 import BudgetPopOver from "../NavigationBar/BudgetPopOver";
+import Links from "./Links";
 
 const Navbar = () => {
 
     const isAuth = cookies().get('isSign')?.value
     const isParticipant = cookies().get('participant')?.value
+    const isAdmin = cookies().get('admin')?.value
 
     return (
-      <div >
+      <div>
         <nav className="bg-black">
           <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-10 ">
             <div className="flex items-center justify-between h-20">
-              <div className="flex item-center">
-                <div className="flex flex-row">
-                  <Image
-                  className="ml-[20px]"
-                    src="/eventwise.png"
-                    alt="event logo"
-                    width={200}
-                    height={200}
-                  />
+              {
+                !isAdmin?
+                <div className="flex item-center">
+                  <div className="flex flex-row">
+                    <Image
+                    className="ml-[20px]"
+                      src="/eventwise.png"
+                      alt="event logo"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="hidden md:block  ">
-                <div className="ml-flex items-center spce-x-4">
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/"}>
-                  Home
-                  </Link>
-
-                  <Link 
-                  className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                  href={"/events"}>
-                  Events
-                  </Link>
-
-                  {
-                    !isParticipant ?
-                    <>
-                    <Link 
-                    className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                    href={"/services"}>
-                    Schedule
-                    </Link>
-                    </>
-                    :
-                    <>
-                    <Link 
-                    className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                    href={"/services"}>
-                    Services
-                    </Link>
-                    </>
-                  }
-
-                  {
-                    !isAuth ? 
-                    <>
-                      <Link 
-                      className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                      href={"/about"}>
-                      About
-                      </Link>
-
-                      <Link 
-                      className="text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5" 
-                      href={"/contact"}>
-                      Contact Us
-                      </Link>
-                    </>
-                    :
-                    <></>
-                  }
-
-
-                </div>
+                :
+                <>
+                </>
+              }
+              <div className="hidden md:block">
+                <Links isAuth={isAuth} isParticipant={isParticipant} isAdmin={isAdmin}/>
               </div>
               <div>   
                 {
