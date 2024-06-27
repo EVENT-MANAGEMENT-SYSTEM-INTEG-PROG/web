@@ -36,6 +36,9 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 
+import { Textarea } from "@/components/ui/textarea"
+
+
 
 const formSchema = z.object({
   event_name: z.string({
@@ -52,6 +55,7 @@ const formSchema = z.object({
   event_time: z.string(),
   event_status: z.string(),
   organizer: z.string(),
+  participants: z.string()
 })
 import { useEffect, useState } from "react"
 import { Organizers, bookEvent } from "../_actions/actions"
@@ -88,7 +92,7 @@ export default function BookForm() {
         organizer: values.organizer,
         event_status: values.event_status,
         event_location: value?.label,
-        participants: ['admin@admin.com']
+        participants: values.participants.split(',')
       }
 
       const res = await bookEvent(data)
@@ -238,6 +242,29 @@ export default function BookForm() {
                         
                       }
                     }}
+                />
+
+                <FormField
+                control={form.control}
+                name="participants"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Participants of the Event</FormLabel>
+                    
+                    <FormControl>
+                      <Textarea
+                          placeholder="juandelacruz@gmail.com,kevindurant@gmail.com"
+                          className=""
+                          {...field}
+                        />
+                    </FormControl>
+                    <FormMessage />
+
+                    <FormDescription>
+                      Separate the email via comma ,
+                    </FormDescription>
+                    </FormItem>
+                )}
                 />
                 
                 <Button className="rounded" type="submit">Submit</Button>

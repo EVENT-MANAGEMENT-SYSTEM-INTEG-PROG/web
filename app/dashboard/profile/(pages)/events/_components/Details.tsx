@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast"
 
 import { Toaster } from "@/components/ui/toaster";
+import { Textarea } from "@/components/ui/textarea";
 
 
 const shareEvent = (event_id: string) => {
@@ -24,7 +25,7 @@ const shareEvent = (event_id: string) => {
 }   
 
 export default function Details({ content }: any) {
-    const {event_name, event_description, event_date, event_time, event_status, event_id, event_location, organizer, participants } = content;
+    const {event_name, event_description, event_date, event_time, event_status, event_id, event_location, organizer, participants, } = content;
     const toast = useToast()
     const router = useRouter()
     const handleSubmit = async () => {
@@ -51,7 +52,7 @@ export default function Details({ content }: any) {
                 View Event
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="border-amber-400">
             <DialogHeader>
             <DialogTitle>Event Details</DialogTitle>
             <DialogDescription>
@@ -63,8 +64,13 @@ export default function Details({ content }: any) {
             <p>Schedule: {event_date}</p>
             <p>Description: {event_description}</p>
 
+            <Textarea disabled value={participants}/>
+            <DialogDescription>
+                You can't send invitation via email if the event has not been approved.
+            </DialogDescription>
+
             {
-                event_status == 'pending'
+                event_status == 'approved'
                 ?
                 <Button className="bg-amber-400 hover:bg-amber-500" onClick={() => {
                     const url = shareEvent(event_id)
