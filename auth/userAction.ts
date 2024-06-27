@@ -12,7 +12,8 @@ export const isAdmin = (async () => {
     try {
         const req: any = await fetch(`${API_URL}/api/user/me`, {
             method: "GET",
-            headers: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            cache: 'no-store',
+            headers: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                 "Authorization": `Bearer ${token}`,
                 "Accept": "application/json"
             }

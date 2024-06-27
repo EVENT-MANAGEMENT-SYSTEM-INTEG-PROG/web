@@ -104,6 +104,7 @@ export default function BookForm() {
             title:"Successfully Book!",
             description: "Event has been booked"
         })
+        router.refresh()
       }
     }
 

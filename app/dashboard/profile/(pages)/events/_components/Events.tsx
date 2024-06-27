@@ -1,4 +1,3 @@
-"use client"
 
 import {
     Table,
@@ -10,6 +9,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import Details from "./Details"
+import { myEvent } from "../_actions/actions"
 
 const events  = [
     {
@@ -32,10 +32,15 @@ const events  = [
     },
 ]
 
-export default function Events() {
+export default async function Events() {
+
+    const event = await myEvent()
+
+    console.log(event)
+
     return (
         <>
-        <div className="bg-amber-400 text-black rounded">
+        <div className="bg-white text-black rounded">
             <Table className="rounded-xl">
                 <TableCaption>An Events you have attended.</TableCaption>
                 <TableHeader>
@@ -50,14 +55,14 @@ export default function Events() {
                 </TableHeader>
                 <TableBody>
                     {
-                        events.map((content, key) => {
+                        event.map((content: any, key: any) => {
                             return (
                                 <>
                                 <TableRow key={key}>
-                                    <TableCell className="font-medium">{content.name}</TableCell>
-                                    <TableCell>{content.status}</TableCell>
-                                    <TableCell>{content.location}</TableCell>
-                                    <TableCell>{content.schedule}</TableCell>
+                                    <TableCell className="font-medium">{content.event_name}</TableCell>
+                                    <TableCell>{content.event_status}</TableCell>
+                                    <TableCell>{content.event_location}</TableCell>
+                                    <TableCell>{content.event_date}</TableCell>
                                     <TableCell>
                                         <Details/>
                                     </TableCell>
