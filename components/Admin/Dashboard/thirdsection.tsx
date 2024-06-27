@@ -7,43 +7,38 @@ import { useState, useEffect } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 
 import 'swiper/css';
+import { Organizers } from '@/app/dashboard/profile/(pages)/events/_actions/actions';
 
 const festival = [
     {
         title: "Wedding",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
     {
         title: "Festival",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
     {
         title: " Festival",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
     {
         title: "Festival",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
     {
         title: "Festival",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
     {
         title: "Festival",
-        date: "January 3",
-        location: "Kalibo, Aklan",
         description: "Celebration of Santo Niño (Child Jesus)",
+        organizer: "Rairu"
     },
 ]
 
@@ -60,7 +55,7 @@ export default function DashboardThirdSection() {
     }, [])
 
     return (
-        <div className="flex w-full justify-around pr-[18vw]">
+        <div className="flex w-full justify-around pr-[19vw] pb-[12vh]">
             <div className="flex w-[45vw]">
                 <Swiper 
             slidesPerView={2}
@@ -81,7 +76,7 @@ export default function DashboardThirdSection() {
                     festival.map((content, key) => {
                         return (
                             <SwiperSlide key={key}>
-                                <AdminEventCard title={content.title} date={content.date} location={content.location} description={content.description}/>
+                                <AdminEventCard title={content.title} description={content.description} organizer={content.organizer}/>
                             </SwiperSlide>
                         )
                     })

@@ -8,9 +8,9 @@ import {
   } from "@/components/ui/card"
 
 import Image from "next/image"
-import  { Calendar, MapPin } from 'lucide-react'
+import  { CircleUserRound } from 'lucide-react'
 
-export default function AdminEventCard({ title, date, location, description, image }: any) {
+export default function AdminEventCard({ title, description, organizer }: any) {
     return (
         <>
             <Card className="rounded-3xl h-[360px] items-center place-content-center">
@@ -19,11 +19,11 @@ export default function AdminEventCard({ title, date, location, description, ima
             </CardHeader>
             <CardContent>
                 <CardDescription className="flex items-center">
-                <Calendar className="mx-1" color={"#2A93D5"} size={15}/>
-                {date}
-                <MapPin className="mx-1" color={"#2A93D5"} size={15} />
-                {location}
+                    {description}
                 </CardDescription>
+                <div className="flex mt-[15vh]">
+                    <CircleUserRound />{organizer}
+                </div>
             </CardContent>
             <CardFooter>
             </CardFooter>

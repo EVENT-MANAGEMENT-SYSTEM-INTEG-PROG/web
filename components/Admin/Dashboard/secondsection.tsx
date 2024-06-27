@@ -13,7 +13,7 @@ const mont = Montserrat({
 
 export default function DashboardSecondSection() {
     return (
-        <div className="flex flex-row justify-around w-full pt-12 pb-8 pr-[26vw] pl-[6vw]">
+        <div className="flex flex-row justify-around w-full pt-12 pb-8 pr-[24vw] pl-[6vw]">
             <div className="flex flex-col">
                 <div className="flex justify-between w-[40vw]">
                     <p className="text-gray-300">Events</p>
@@ -23,7 +23,7 @@ export default function DashboardSecondSection() {
 
                 </div>
             </div>
-            <div className={cn(mont.variable, "font-sans")}>
+            <div className={cn(mont.variable, "font-sans text-2xl")}>
                 Upcoming
             </div>
         </div>
