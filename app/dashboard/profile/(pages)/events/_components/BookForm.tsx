@@ -28,6 +28,14 @@ import { cn } from "@/lib/utils"
 
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
+
 
 const formSchema = z.object({
   event_name: z.string({
@@ -43,12 +51,18 @@ const formSchema = z.object({
   }).max(50),
   event_time: z.string(),
   event_status: z.string(),
+  organizer: z.string(),
 })
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Organizers, bookEvent } from "../_actions/actions"
+
+import { useRouter } from "next/navigation"
+
 
 export default function BookForm() {
+    const router = useRouter()
+    const [organizers, setOrganizers] = useState([])
     const [value, setValue] = useState<any>("null")
-
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -56,19 +70,56 @@ export default function BookForm() {
         defaultValues: {
           event_name: "",
           event_description:"",
-          event_time: "",
-          event_status: "pending"
+          event_time: "19:30:10",
+          event_status: "pending",
         }
     })
 
     const  onSubmit = async (values: z.infer<typeof formSchema>) => {
-      console.log(values)
+    
+            
+      
+      const date = values.event_date.toISOString().slice(0,10)
+      const data = {
+        event_name: values.event_name,
+        event_description: values.event_description,
+        event_date: date,
+        event_time: values.event_time,
+        organizer: values.organizer,
+        event_status: values.event_status,
+        event_location: value?.label,
+        participants: ['admin@admin.com']
+      }
+
+      const res = await bookEvent(data)
+
+      if(!res) {
+        toast({
+            title:"Something went wrong",
+            description: res
+        })
+      }
+      else {
+        toast({
+            title:"Successfully Book!",
+            description: "Event has been booked"
+        })
+      }
     }
+
+    useEffect(() => {
+        const getOrganizer = async () => {
+            const response = await Organizers()
+            
+            setOrganizers(response)
+        }
+
+        getOrganizer()
+    },[])
     
     return (
         <>
         <div className="flex justify-center px-5">
-            <Toaster />
             <Form {...form}>
             <form  onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex justify-center flex-col w-[300px]">
                 {/** Event Name */}
@@ -142,7 +193,34 @@ export default function BookForm() {
                   )}
                 />
 
-                  <GooglePlacesAutocomplete
+                <FormField
+                control={form.control}
+                name="organizer"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Event Organizer</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select organizer for the event " />
+                        </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {
+                                organizers.map((content: any, key) => {
+                                    return (
+                                        <SelectItem key={key} value={`${content?.user_id}`}>{`${content?.first_name} ${content?.last_name}`}</SelectItem>
+                                    )
+                                })
+                            }
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+
+                <GooglePlacesAutocomplete
                     apiKey="AIzaSyCdMCFR2pwGjJdYnu0Z_cq3KFC8cDWI4hA"
                     selectProps={{
                       value,
@@ -159,7 +237,7 @@ export default function BookForm() {
                         
                       }
                     }}
-                  />
+                />
                 
                 <Button className="rounded" type="submit">Submit</Button>
 

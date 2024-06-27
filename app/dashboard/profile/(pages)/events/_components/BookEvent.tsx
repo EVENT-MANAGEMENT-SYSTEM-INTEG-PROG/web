@@ -15,13 +15,14 @@ import {
 
 import BookForm from "./BookForm"
 import { useState, useEffect } from "react"
+import { Toaster } from "@/components/ui/toaster"
 
 export default function EventButton() {
-
-
+        
     return (
         <>
         <div className="m-10 flex justify-end" suppressHydrationWarning>
+        <Toaster />
             <Dialog>
             <DialogTrigger asChild>
                 <Button className="rounded-full bg-amber-400 text-black p-6 font-bold hover:bg-black hover:text-white">
