@@ -31,7 +31,7 @@ export default async function middleware(req:NextRequest) {
         return NextResponse.redirect(new URL('/login', req.nextUrl) );
     }
 
-    if(req.nextUrl.pathname.startsWith('/dashboard/admin') && user.role_id == 2 ) {
+    if(req.nextUrl.pathname.startsWith('/dashboard/admin') && user.role_id >= 2 ) {
         return NextResponse.redirect(new URL('/login', req.nextUrl) );
     }
       
