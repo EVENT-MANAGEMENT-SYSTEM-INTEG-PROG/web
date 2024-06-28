@@ -1,7 +1,9 @@
+import Events from "@/components/Admin/Events/Event"
+
 export default function EventPage() {
     return (
         <>
-        <p>this is for admin only page</p>
+            <Events />
         </>
     )
 }
