@@ -1,6 +1,8 @@
 import TopCard from "@/components/Static/TopCard"
 import EventButton from "./_components/BookEvent"
 import Events from "./_components/Events"
+
+
 export default function EventPage() {
     return (
         <>

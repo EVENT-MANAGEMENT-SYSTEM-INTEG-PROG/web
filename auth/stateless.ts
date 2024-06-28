@@ -25,8 +25,8 @@ export async function createSession(token: string, role: string) {
     if(role == "2") {
         cookies().set("participant", "true",
             {
-                httpOnly: true,
-                secure: true,
+                httpOnly: false,
+                secure: false,
                 sameSite: 'lax',
                 path: '/'
             }
@@ -36,8 +36,8 @@ export async function createSession(token: string, role: string) {
     if(role == "1") {
         cookies().set("admin", "true",
             {
-                httpOnly: true,
-                secure: true,
+                httpOnly: false,
+                secure: false,
                 sameSite: 'lax',
                 path: '/'
             }
