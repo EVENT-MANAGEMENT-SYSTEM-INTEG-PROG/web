@@ -27,7 +27,9 @@ export default async function UpcomingEvent() {
                             !(new Date(content.event_date) > new Date(date))
                             ?
                             <>
-                                <UpcomingCard/>
+                                <UpcomingCard event_name={content.event_name} event_status={content.event_status} event_description={content.event_description} event_time={content.event_time}
+                                event_date={content.event_date}
+                                event_location={content.event_location}/>
                             </>
                             :
                                 <>
