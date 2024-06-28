@@ -15,19 +15,17 @@ export default function UpcomingCard({ event_name, event_location, event_time, e
                 </div>
             </div>
 
-            <div className="text-black flex text-sm px-4 text-gray-500">
+            <div className="flex text-sm px-4 text-gray-500">
                 {event_description}
             </div>
 
-            <div className="text-black flex text-sm my-5 text-gray-500 items-center">
+            <div className="flex text-sm my-5 text-gray-500 items-center">
                 <p>{event_location}</p>
             </div>
 
             <div className="flex items-center">
             <p className="text-gray-500 text-sm">{event_time}</p>
             </div>
-           
-
         </div>
         </>
     )
