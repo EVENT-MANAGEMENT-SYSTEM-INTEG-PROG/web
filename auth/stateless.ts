@@ -10,7 +10,7 @@ export async function createSession(token: string, role: string) {
             httpOnly: true,
             secure: true,
             sameSite: 'lax',
-            path: '/'
+            path: '/',
         }
     )
     cookies().set("isSign", "true",

@@ -8,7 +8,6 @@ const token = cookies().get("session")?.value
 
 export const Organizers =  async () => {
     
-
     try {
         const req: any = await fetch(`${API_URL}/api/user/organizers`, {
             method: "GET",
@@ -72,7 +71,41 @@ export const bookEvent = async (data: any) => {
 }
 
 
-export const cancelEvent = async (data: any, id: string) => {
+
+export const makeSchedule = async (data: any) => {
+    try {
+        const req: any = await fetch(`${API_URL}/api/schedule`, {
+            method: "POST",
+            cache: 'no-store',
+            headers: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                "Authorization": `Bearer ${token}`,
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        const res = await req.json()
+
+
+        if(!req.ok) {
+            const message = res?.message
+
+            return { message }
+        }
+        else {
+            const data = res
+
+            return data
+        }
+    } catch (error) {
+        const message = error
+        return { message }
+    }
+}
+
+
+export const manageEvent = async (data: any, id: string) => {
     try {
         const req: any = await fetch(`${API_URL}/api/event/${id}`, {
             method: "PATCH",
