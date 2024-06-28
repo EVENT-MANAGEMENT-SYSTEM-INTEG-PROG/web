@@ -128,18 +128,31 @@ export default function BookForm() {
             <Form {...form}>
             <form  onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex justify-center flex-col w-[300px]">
                 {/** Event Name */}
-                <FormField
-                control={form.control}
-                name="event_name"
-                render={({ field }) => (
+                        <FormField
+                  control={form.control}
+                  name="event_name"
+                  render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Event Name</FormLabel>
-                    <FormControl>
-                        <Input className="rounded" placeholder="Fiesta" {...field} />
-                    </FormControl>
-                    <FormMessage />
+                      <FormLabel>Event Type</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select type of event" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Wedding">Wedding</SelectItem>
+                          <SelectItem value="Birthday">Birthday</SelectItem>
+                          <SelectItem value="Fiestival">Fiestival</SelectItem>
+                          <SelectItem value="Ceremony">Ceremony</SelectItem>
+                          <SelectItem value="Concert">Concert</SelectItem>
+                          <SelectItem value="Summits">Summits</SelectItem>
+                          <SelectItem value="Reunion">Reunion</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
                     </FormItem>
-                )}
+                  )}
                 />
                 {/** Event_Description */}
                 <FormField
