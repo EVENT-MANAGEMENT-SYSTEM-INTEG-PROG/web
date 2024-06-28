@@ -12,7 +12,7 @@ export const assignEvent = async () => {
     try {
         const req: any = await fetch(`${API_URL}/api/event/assign/organizer`, {
             method: "GET",
-            next: {revalidate: 10},
+            cache: 'no-store',
             headers: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                 "Authorization": `Bearer ${token}`,
                 "Accept": "application/json"
@@ -34,6 +34,8 @@ export const assignEvent = async () => {
         }
 
     } catch (error) {
-        return []
+        const message = error
+
+        return { message }
     }
 }

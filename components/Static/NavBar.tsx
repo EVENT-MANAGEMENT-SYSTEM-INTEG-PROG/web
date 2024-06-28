@@ -48,7 +48,6 @@ const Navbar = () => {
                   </Link>
                   :
                   <div>
-                    <NotificationPopOver/>
                     <BudgetPopOver/>
                     <ProfilePopOver/>
                   </div>

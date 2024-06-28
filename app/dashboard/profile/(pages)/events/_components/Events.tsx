@@ -15,7 +15,6 @@ export default async function Events() {
 
     const event = await myEvent()
 
-    console.log(event)
 
     return (
         <>

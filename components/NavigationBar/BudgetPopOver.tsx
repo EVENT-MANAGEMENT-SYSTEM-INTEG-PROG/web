@@ -12,11 +12,9 @@ export default function BudgetPopOver() {
         {
         isParticipant != undefined
         ?
-        <>
         <Button variant={"ghost"} onClick={() => router.push('/login')} className="hover:bg-amber-300">
             <Wallet/>
         </Button>
-        </>
         :
         <>
         </>
