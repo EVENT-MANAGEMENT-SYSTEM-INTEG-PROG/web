@@ -16,6 +16,8 @@ export default async function Events() {
 
     const event = await assignEvent()
 
+    console.log(event)
+
     return (
         <>
         <div className="bg-white text-black rounded m-10">

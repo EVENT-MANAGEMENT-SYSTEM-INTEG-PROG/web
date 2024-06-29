@@ -13,6 +13,7 @@ import { allEvents, approvedEvents } from "@/components/Admin/Events/_actions/ac
 import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input";
 
 const popp = Poppins({
     subsets: ['latin'],
@@ -57,8 +58,7 @@ const totals = [
 
 export default async function EventsTable() {
 
-    const allevent = await allEvents()
-    const approvedevent = await approvedEvents()
+    const event = await assignEvent()
 
     return (
         <>
@@ -90,6 +90,7 @@ export default async function EventsTable() {
                     </div>
                 </div>
             ))}
+            <Input className="rounded-[20px] bg-white text-black w-[15vw]" placeholder="Search Event"/>
             <Tabs defaultValue="all" className={cn(popp.variable,"font-sans")}>
                 <TabsList className="border-0 bg-transparent">
                     <TabsTrigger className="bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="all">All</TabsTrigger>

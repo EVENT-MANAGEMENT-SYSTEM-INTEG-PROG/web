@@ -9,7 +9,8 @@ import {
   } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button"
-import { cancelEvent } from "../_actions/actions";
+import { manageEvent } from "../_actions/actions";
+
 import { useRouter } from "next/navigation";
 
 
@@ -39,7 +40,7 @@ export default function Details({ content }: any) {
             participants,
             event_status: 'cancelled'
         }
-        const cancel = await cancelEvent(data, event_id)
+        const cancel = await manageEvent(data, event_id)
     }
 
     return (

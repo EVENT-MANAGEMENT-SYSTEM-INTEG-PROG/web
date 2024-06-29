@@ -40,7 +40,7 @@ export default function Links(props: any) {
                           <>
                             <Link 
                             className={`text-white text-xl hover:bg-white hover:text-black rounded-lg p-3 ml-5 ${router === '/schedule' ? 'bg-white text-black' : ''}`} 
-                            href={"/schedule"}>
+                            href={"/dashboard/organizer"}>
                             Schedule
                             </Link>
                           </>

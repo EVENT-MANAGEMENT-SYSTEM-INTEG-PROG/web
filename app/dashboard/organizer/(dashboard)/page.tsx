@@ -6,7 +6,7 @@ export default function DashboardPage() {
     return (
         <>
         <TopCard title={"Managed Event"}/>
-        <div className="flex justify-start items-center">
+        <div className="flex justify-center">
             <Events/>
             <UpcomingEvent/>
         </div>

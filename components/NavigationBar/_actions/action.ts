@@ -39,3 +39,36 @@ export const assignEvent = async () => {
         return { message }
     }
 }
+
+export const getEvent = async () => {
+
+    try {
+        const req: any = await fetch(`${API_URL}/api/event`, {
+            method: "GET",
+            cache: 'no-store',
+            headers: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            }
+        })
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        const res = await req.json()
+
+
+        if(!req.ok) {
+            const message = res?.message
+
+            return { message }
+        }
+        else {
+            const data = res
+            
+            return data
+        }
+
+    } catch (error) {
+        const message = error
+
+        return { message }
+    }
+}

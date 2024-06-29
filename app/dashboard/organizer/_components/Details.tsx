@@ -71,9 +71,9 @@ export default function Details({ content }: any) {
             register_date: new Date().toISOString().slice(0,10),
             register_time: new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'})
         }
-        
+
         const register = await registerEvent(registerData)
-        console.log(register)
+        
         const schedule = await makeSchedule(sched)
         
         
