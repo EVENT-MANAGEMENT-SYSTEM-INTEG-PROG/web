@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { manageEvent, makeSchedule } from "../../profile/(pages)/events/_actions/actions";
 import { useRouter } from "next/navigation";
-
+import { registerEvent } from "../_action/action";
 
 import { useToast } from "@/components/ui/use-toast"
 
@@ -25,7 +25,7 @@ const shareEvent = (event_id: string) => {
 }   
 
 export default function Details({ content }: any) {
-    const {event_name, event_description, event_date, event_time, event_status, event_id, event_location, organizer, participants, } = content;
+    const {event_name, event_description, event_date, event_time, event_status, event_id, event_location, organizer, participants, user_id } = content;
     const toast = useToast()
     const router = useRouter()
 
@@ -63,7 +63,19 @@ export default function Details({ content }: any) {
             schedule_date: event_date
         }
 
+        const registerData: any = {
+            user_id,
+            event_id,
+            register_code: Math.floor(Math.random() * 10000).toString().padStart(4, "0"),
+            register_status: "confirmed",
+            register_date: new Date().toISOString().slice(0,10),
+            register_time: new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'})
+        }
+        
+        const register = await registerEvent(registerData)
+        console.log(register)
         const schedule = await makeSchedule(sched)
+        
         
     }
 
