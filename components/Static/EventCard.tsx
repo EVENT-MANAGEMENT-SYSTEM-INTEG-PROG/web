@@ -13,7 +13,7 @@ import  { Calendar, MapPin } from 'lucide-react'
 export default function EventCard({ title, date, location, description, image }: any) {
     return (
         <>
-            <Card className="rounded-3xl h-[360px] items-center place-content-center">
+            <Card className="rounded-3xl w-[350px] h-[360px] items-center place-content-center m-5">
             <CardHeader className="flex items-center">
                 <Image className="rounded-3xl" width={300} height={170} src={image} alt="party"/>
             </CardHeader>
