@@ -58,7 +58,8 @@ const totals = [
 
 export default async function EventsTable() {
 
-    const event = await assignEvent()
+    const allevent = await allEvents()
+    const approvedevent = await approvedEvents()
 
     return (
         <>
