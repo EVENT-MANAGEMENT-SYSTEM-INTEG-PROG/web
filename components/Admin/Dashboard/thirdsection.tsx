@@ -115,15 +115,15 @@ export default function DashboardThirdSection() {
                             :
                             <>
                             <p>loading</p>
-                            {
-                            festival.map((content, key) => {
-                                return (
-                                    <SwiperSlide key={key}>
-                                    <Skeleton className="w-[200px] h-[300px] rounded-3xl bg-amber-300" />
-                                    </SwiperSlide>
-                                )
-                            })
-                            }
+                                {
+                                festival.map((content, key) => {
+                                    return (
+                                        <SwiperSlide key={key}>
+                                        <Skeleton className="w-[200px] h-[300px] rounded-3xl bg-amber-300" />
+                                        </SwiperSlide>
+                                    )
+                                })
+                                }
                             </>
                         }
                 </Swiper>

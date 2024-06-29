@@ -6,7 +6,10 @@ import {
     TableCell,
     TableHead,
     TableHeader,
-    TableRow,} from "@/components/ui/table";
+    TableRow,
+  } from "@/components/ui/table"
+import Details from "@/app/dashboard/organizer/_components/Details";
+import { assignEvent } from "@/components/NavigationBar/_actions/action"
 import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils"
@@ -59,7 +62,10 @@ const totals = [
     }
 ]
 
-export default function EventBookingTable() {
+export default async function EventBookingTable() {
+
+    const event = await assignEvent()
+
     return (
         <>
             {totals.map((TotalRequest) => (
@@ -95,35 +101,39 @@ export default function EventBookingTable() {
                     <TabsTrigger className="bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="all">List of Events</TabsTrigger>
                 </TabsList>
                 <TabsContent value="all">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                            <TableHead className="w-[300px]">Organizer Name</TableHead>
-                            <TableHead>Event Name</TableHead>
-                            <TableHead>Event Type</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Actions</TableHead>
-                            <TableHead> </TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {organizerNames.map((organizerName) => (
-                            <TableRow key={organizerName.organizerName}>
-                                <TableCell className="font-medium">{organizerName.organizerName}</TableCell>
-                                <TableCell>{organizerName.eventName}</TableCell>
-                                <TableCell>{organizerName.eventType}</TableCell>
-                                <TableCell>{organizerName.status}</TableCell>
-                                <TableCell>{organizerName.date}</TableCell>
-                                <TableCell>
-                                    <button className="bg-blue-600 hover:bg-blue-800 text-white py-1 px-2 rounded">View details</button>
-                                    <button className="bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded">Edit</button>
-                                    <button className="bg-red-600 hover:bg-red-800 text-white py-1 px-2 rounded">Delete</button>
-                                </TableCell>
-                            </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                    <div className="bg-white text-black rounded m-10">
+                        <Table className="rounded-xl">
+                            <TableCaption>An Events you have managed.</TableCaption>
+                            <TableHeader>
+                                <TableRow>
+                                <TableHead className="w-[200px]">Event Name</TableHead>
+                                <TableHead >Status</TableHead>
+                                <TableHead>Location</TableHead>
+                                <TableHead className="">Schedule</TableHead>
+                                <TableHead className="text-right">Schedule</TableHead>  
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {
+                                    event.map((content: any, key: any) => {
+                                        return (
+                                            <>
+                                            <TableRow key={key}>
+                                                <TableCell className="font-medium">{content.event_name}</TableCell>
+                                                <TableCell>{content.event_status}</TableCell>
+                                                <TableCell>{content.event_location}</TableCell>
+                                                <TableCell>{content.event_date}</TableCell>
+                                                <TableCell>
+                                                    <Details content={content}/>
+                                                </TableCell>
+                                            </TableRow>
+                                            </>
+                                        )
+                                    })
+                                }
+                            </TableBody>
+                        </Table>
+                    </div>
                 </TabsContent>
             </Tabs>
         </>
