@@ -17,7 +17,7 @@ export default function DashboardSecondSection() {
             <div className="flex flex-col">
                 <div className="flex justify-between w-[40vw]">
                     <p className="text-gray-300">Events</p>
-                    <Link href="" className="text-amber-500 hover:text-gray-300">See all</Link>
+                    <Link href="/dashboard/admin/events" className="text-amber-500 hover:text-gray-300">See all</Link>
                 </div>
                 <div>
 

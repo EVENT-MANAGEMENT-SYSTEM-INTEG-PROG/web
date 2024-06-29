@@ -7,7 +7,7 @@ export default function Events() {
             <div className="w-full flex justify-end py-5 px-5">
                 
             </div>
-            <div className="w-[100%] border border-rose-600 px-12">
+            <div className="w-[100%] px-12">
                 <EventList />
             </div>
         </>

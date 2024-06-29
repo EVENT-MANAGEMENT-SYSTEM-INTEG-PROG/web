@@ -9,8 +9,9 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import Details from "@/app/dashboard/organizer/_components/Details";
-import { assignEvent } from "@/components/NavigationBar/_actions/action"
+import { allEvents, approvedEvents, cancelledEvents, pendingEvents, NumAllEvents, NumPendingEvents, NumApprovedEvents, NumCancelledEvents } from "@/components/Admin/Events/_actions/action";
 import { Poppins } from "next/font/google";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { cn } from "@/lib/utils"
 
@@ -51,48 +52,47 @@ const organizerNames = [
     },
 ]
 
-const totals = [
-    {
-        TotalRequest: "900",
-        Confirmed: "200",
-        TotalRequest1: "900",
-        TotalRequest2: "900",
-        TotalRequest3: "900",
-        TotalRequest4: "823"
-    }
-]
-
 export default async function EventBookingTable() {
 
-    const event = await assignEvent()
+    const event = await allEvents()
+
+    const alleventnum = await NumAllEvents()
+    const pendingeventnum = await NumPendingEvents()
+    const approvedeventnum = await NumApprovedEvents()
+    const cancelledeventnum = await NumCancelledEvents()
+
+    console.log(alleventnum)
+
+    const totals = [
+        {
+            AllEvents: alleventnum,
+            Pending: pendingeventnum,
+            Approved: approvedeventnum,
+            Cancelled: cancelledeventnum,
+            TotalRequest3: "900",
+            TotalRequest4: "823"
+        }
+    ]
 
     return (
         <>
             {totals.map((TotalRequest) => (
-                <div key={TotalRequest.TotalRequest} className="flex justify-around py-5 px-12 w-full">
+                <div key={TotalRequest.AllEvents} className="flex justify-around py-5 px-12 w-full">
                     <div className="flex bg-gray-200 text-black items-center border-l-4 border-blue-400 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.TotalRequest}</p>
-                        <p className="text-sm">Total Request</p>
+                        <p className="text-md text-center mr-2">{TotalRequest.AllEvents}</p>
+                        <p className="text-sm">Total Events</p>
                     </div>
                     <div className="flex bg-gray-200 text-black items-center border-l-4 border-green-500 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.Confirmed}</p>
-                        <p className="text-sm">Confirmed</p>
+                        <p className="text-md text-center mr-2">{TotalRequest.Pending}</p>
+                        <p className="text-sm">Pending</p>
                     </div>
                     <div className="flex bg-gray-200 text-black items-center border-l-4 border-yellow-400 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.TotalRequest1}</p>
-                        <p className="text-sm">Total Request</p>
+                        <p className="text-md text-center mr-2">{TotalRequest.Approved}</p>
+                        <p className="text-sm">Approved</p>
                     </div>
                     <div className="flex bg-gray-200 text-black items-center border-l-4 border-pink-400 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.TotalRequest2}</p>
-                        <p className="text-sm">Total Request</p>
-                    </div>
-                    <div className="flex bg-gray-200 text-black items-center border-l-4 border-gray-500 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.TotalRequest3}</p>
-                        <p className="text-sm">Total Request</p>
-                    </div>
-                    <div className="flex bg-gray-200 text-black items-center border-l-4 border-red-300 px-3 py-5">
-                        <p className="text-md text-center mr-2">{TotalRequest.TotalRequest4}</p>
-                        <p className="text-sm">Total Request</p>
+                        <p className="text-md text-center mr-2">{TotalRequest.Cancelled}</p>
+                        <p className="text-sm">Cancelled</p>
                     </div>
                 </div>
             ))}
@@ -101,6 +101,7 @@ export default async function EventBookingTable() {
                     <TabsTrigger className="bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="all">List of Events</TabsTrigger>
                 </TabsList>
                 <TabsContent value="all">
+                    <ScrollArea className="h-[500px] pb-8">
                     <div className="bg-white text-black rounded m-10">
                         <Table className="rounded-xl">
                             <TableCaption>An Events you have managed.</TableCaption>
@@ -134,6 +135,7 @@ export default async function EventBookingTable() {
                             </TableBody>
                         </Table>
                     </div>
+                    </ScrollArea>
                 </TabsContent>
             </Tabs>
         </>

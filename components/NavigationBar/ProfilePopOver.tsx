@@ -46,7 +46,7 @@ export default function ProfilePopOver() {
                     <div className="flex flex-row my-2 hover:bg-slate-200 rounded py-3 cursor-pointer">
                         <Settings className="mx-1"/>
                         <Link href={"/dashboard/profile/settings"}>
-                            Setting
+                            Settings
                         </Link>
                     </div>
 

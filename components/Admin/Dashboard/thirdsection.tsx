@@ -5,17 +5,7 @@ import AdminEventCard from '@/components/Static/Admin/AdminEventCard';
 import { useState, useEffect } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 import { Dot } from 'lucide-react';
-
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-
+import { ScrollArea } from "@/components/ui/scroll-area"
 import 'swiper/css';
 
 const festival = [
@@ -72,16 +62,28 @@ const events  = [
     },
 ]
 
+import { upcomingEvents } from './_actions/action';
+
 export default function DashboardThirdSection() {
 
     const [isLoading, setLoading] = useState<boolean>(false)
+    const [content, setContent] = useState<any>([])
 
     useEffect(() => {
         setInterval(() => {
             setLoading(true)
         } ,1000)
 
-        setLoading(false)
+        setLoading(true)
+        
+        const getEvent = async () => {
+            const event = await upcomingEvents()
+
+            setContent(event)
+        }
+
+        getEvent()
+
     }, [])
 
     console.log(event)
@@ -105,10 +107,10 @@ export default function DashboardThirdSection() {
 
                         {
                             isLoading ? 
-                            festival.map((content, key) => {
+                            content.map((content:any , key: any) => {
                                 return (
                                     <SwiperSlide key={key}>
-                                        <AdminEventCard title={content.title} description={content.description} organizer={content.organizer}/>
+                                        <AdminEventCard title={content.event_name} description={content.event_description} organizer={content.event_status}/>
                                     </SwiperSlide>
                                 )
                             })
@@ -116,7 +118,7 @@ export default function DashboardThirdSection() {
                             <>
                             <p>loading</p>
                                 {
-                                festival.map((content, key) => {
+                                content.map((content: any, key: any) => {
                                     return (
                                         <SwiperSlide key={key}>
                                         <Skeleton className="w-[200px] h-[300px] rounded-3xl bg-amber-300" />
@@ -129,16 +131,18 @@ export default function DashboardThirdSection() {
                 </Swiper>
             </div>
             <div className='w-full pl-[8vw]'>
-                {
-                    events.map((content: any, key: any) => {
-                        return (
-                            <div key={key} className='flex items-center rounded-md font-medium bg-white text-center text-black py-5 pl-5 pr-10 w-full mt-5'>
-                                <div><Dot color='yellow' /></div>
-                                <div className='pl-3'>{content.name}<br/>{content.status}</div>
-                            </div>
-                        )
-                    })
-                }
+                <ScrollArea className="h-[350px] w-full rounded-md p-4 m-2">
+                    {
+                        content.map((content: any, key: any) => {
+                            return (
+                                <div key={key} className='flex items-center rounded-md font-medium bg-white text-center text-black py-5 pl-5 pr-10 w-full mt-5'>
+                                    <div><Dot color='yellow' /></div>
+                                    <div className='pl-3'>{content.event_name}<br/>{content.status}</div>
+                                </div>
+                            )
+                        })
+                    }
+                </ScrollArea>
             </div>
         </div>
     );
