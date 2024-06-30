@@ -9,7 +9,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import Details from "@/app/dashboard/organizer/_components/Details";
-import { assignEvent } from "@/components/NavigationBar/_actions/action"
+import { allEvents, approvedEvents } from "@/components/Admin/Events/_actions/action";
 import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils"
@@ -57,7 +57,8 @@ const totals = [
 
 export default async function EventsTable() {
 
-    const event = await assignEvent()
+    const allevent = await allEvents()
+    const approvedevent = await approvedEvents()
 
     return (
         <>
@@ -92,8 +93,8 @@ export default async function EventsTable() {
             <Tabs defaultValue="all" className={cn(popp.variable,"font-sans")}>
                 <TabsList className="border-0 bg-transparent">
                     <TabsTrigger className="bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="all">All</TabsTrigger>
-                    <TabsTrigger className="ml-3 bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="published">Published</TabsTrigger>
-                    <TabsTrigger className="ml-3 bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="draft">Draft</TabsTrigger>
+                    <TabsTrigger className="ml-3 bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="approved">Approved</TabsTrigger>
+                    <TabsTrigger className="ml-3 bg-white data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-black data-[state=active]:bg-white rounded-none" value="canceled">Canceled</TabsTrigger>
                 </TabsList>
                 <TabsContent value="all">
                     <div className="bg-white text-black rounded m-10">
@@ -110,7 +111,7 @@ export default async function EventsTable() {
                             </TableHeader>
                             <TableBody>
                                 {
-                                    event.map((content: any, key: any) => {
+                                    allevent.map((content: any, key: any) => {
                                         return (
                                             <>
                                             <TableRow key={key}>
@@ -130,7 +131,7 @@ export default async function EventsTable() {
                         </Table>
                     </div>
                 </TabsContent>
-                <TabsContent value="published">
+                <TabsContent value="approved">
                     <div className="bg-white text-black rounded m-10">
                         <Table className="rounded-xl">
                             <TableCaption>An Events you have managed.</TableCaption>
@@ -145,7 +146,7 @@ export default async function EventsTable() {
                             </TableHeader>
                             <TableBody>
                                 {
-                                    event.map((content: any, key: any) => {
+                                    approvedevent.map((content: any, key: any) => {
                                         return (
                                             <>
                                             <TableRow key={key}>
@@ -165,7 +166,7 @@ export default async function EventsTable() {
                         </Table>
                     </div>
                 </TabsContent>
-                <TabsContent value="draft">
+                <TabsContent value="canceled">
                     <div className="bg-white text-black rounded m-10">
                         <Table className="rounded-xl">
                             <TableCaption>An Events you have managed.</TableCaption>
@@ -180,7 +181,7 @@ export default async function EventsTable() {
                             </TableHeader>
                             <TableBody>
                                 {
-                                    event.map((content: any, key: any) => {
+                                    approvedevent.map((content: any, key: any) => {
                                         return (
                                             <>
                                             <TableRow key={key}>
